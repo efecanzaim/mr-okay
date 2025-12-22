@@ -1,0 +1,85 @@
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        black: {
+          DEFAULT: "#050505",
+          900: "#050505",
+          800: "#0a0a0a",
+          700: "#111111",
+          600: "#1a1a1a",
+          500: "#2a2a2a",
+        },
+        white: {
+          DEFAULT: "#FFFFFF",
+          900: "#FFFFFF",
+          800: "#F5F5F5",
+          700: "#EBEBEB",
+          600: "#E0E0E0",
+        },
+        silver: {
+          DEFAULT: "#C0C0C0",
+          light: "#D4D4D4",
+          dark: "#8B8B8B",
+          metallic: "#A8A8A8",
+        },
+      },
+      fontFamily: {
+        serif: ["Playfair Display", "Georgia", "serif"],
+        sans: ["Montserrat", "system-ui", "sans-serif"],
+      },
+      letterSpacing: {
+        widest: "0.25em",
+        ultrawide: "0.35em",
+      },
+      animation: {
+        "fade-in": "fadeIn 1s ease-out forwards",
+        "fade-up": "fadeUp 1s ease-out forwards",
+        "slide-up": "slideUp 0.6s ease-out forwards",
+        "scale-in": "scaleIn 0.4s ease-out forwards",
+        float: "float 6s ease-in-out infinite",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        fadeUp: {
+          "0%": { opacity: "0", transform: "translateY(40px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        slideUp: {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+        scaleIn: {
+          "0%": { transform: "scale(0.95)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+      },
+      transitionDuration: {
+        "400": "400ms",
+        "600": "600ms",
+        "800": "800ms",
+        "1200": "1200ms",
+      },
+      backdropBlur: {
+        xs: "2px",
+      },
+    },
+  },
+  plugins: [],
+};
+
+export default config;

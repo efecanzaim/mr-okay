@@ -1,0 +1,163 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { Trash2, Minus, Plus } from "lucide-react";
+import MagneticButton from "@/components/MagneticButton";
+
+// Sample cart data
+const cartItems = [
+  {
+    id: "noir-absolute",
+    name: "Noir Absolute",
+    collection: "Avant-Garde",
+    size: "100ml",
+    price: 8850,
+    quantity: 1,
+  },
+  {
+    id: "silver-knight",
+    name: "Silver Knight",
+    collection: "Klasik",
+    size: "50ml",
+    price: 6450,
+    quantity: 2,
+  },
+];
+
+export default function CartPage() {
+  const subtotal = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+
+  return (
+    <div className="bg-white min-h-screen pt-24">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 lg:py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="font-serif text-4xl lg:text-5xl text-black mb-12">
+            Alışveriş Sepeti
+          </h1>
+
+          {cartItems.length > 0 ? (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+              {/* Cart Items */}
+              <div className="lg:col-span-2 space-y-8">
+                {cartItems.map((item, index) => (
+                  <motion.div
+                    key={item.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex gap-6 pb-8 border-b border-black/10"
+                  >
+                    {/* Product Image */}
+                    <div className="w-28 h-36 bg-gray-100 flex-shrink-0">
+                      <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200" />
+                    </div>
+
+                    {/* Product Info */}
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <p className="text-[10px] tracking-ultrawide uppercase text-silver-dark mb-1">
+                          {item.collection}
+                        </p>
+                        <Link href={`/product/${item.id}`}>
+                          <h3 className="font-serif text-lg text-black hover:text-silver transition-colors">
+                            {item.name}
+                          </h3>
+                        </Link>
+                        <p className="text-sm text-silver-dark mt-1">
+                          {item.size}
+                        </p>
+                      </div>
+
+                      <div className="flex items-end justify-between">
+                        {/* Quantity */}
+                        <div className="flex items-center border border-black/20">
+                          <button className="p-2 text-silver hover:text-black transition-colors">
+                            <Minus size={14} />
+                          </button>
+                          <span className="w-10 text-center text-sm text-black">
+                            {item.quantity}
+                          </span>
+                          <button className="p-2 text-silver hover:text-black transition-colors">
+                            <Plus size={14} />
+                          </button>
+                        </div>
+
+                        <button className="p-2 text-silver-dark hover:text-black transition-colors">
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Price */}
+                    <div className="text-right">
+                      <p className="text-black font-light">
+                        ₺{(item.price * item.quantity).toLocaleString('tr-TR')}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Order Summary */}
+              <div className="lg:col-span-1">
+                <div className="bg-gray-50 p-8 sticky top-32">
+                  <h2 className="text-xs tracking-ultrawide uppercase text-silver mb-8">
+                    Sipariş Özeti
+                  </h2>
+
+                  <div className="space-y-4 mb-8">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-silver-dark">Ara Toplam</span>
+                      <span className="text-black">₺{subtotal.toLocaleString('tr-TR')}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-silver-dark">Kargo</span>
+                      <span className="text-black">Ücretsiz</span>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between py-4 border-t border-black/10 mb-8">
+                    <span className="text-black">Toplam</span>
+                    <span className="text-xl text-black font-light">
+                      ₺{subtotal.toLocaleString('tr-TR')}
+                    </span>
+                  </div>
+
+                  <MagneticButton variant="primary" size="lg" className="w-full">
+                    Ödemeye Geç
+                  </MagneticButton>
+
+                  <Link
+                    href="/collections/businessman"
+                    className="block text-center text-xs tracking-ultrawide uppercase text-silver-dark hover:text-black transition-colors mt-6"
+                  >
+                    Alışverişe Devam Et
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="text-center py-24">
+              <p className="text-silver-dark font-light mb-8">
+                Sepetiniz boş.
+              </p>
+              <Link href="/collections/businessman">
+                <MagneticButton variant="outline">
+                  Koleksiyonu Keşfet
+                </MagneticButton>
+              </Link>
+            </div>
+          )}
+        </motion.div>
+      </div>
+    </div>
+  );
+}

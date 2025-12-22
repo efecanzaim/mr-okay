@@ -1,0 +1,198 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { useState } from "react";
+import ScrollReveal from "@/components/ScrollReveal";
+import MagneticButton from "@/components/MagneticButton";
+import { Mail, MapPin, Phone } from "lucide-react";
+
+export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission
+    console.log(formData);
+  };
+
+  return (
+    <div className="bg-white min-h-screen">
+      {/* Hero */}
+      <section className="relative h-[50vh] flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-100 via-gray-50 to-white" />
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="relative z-10 text-center px-6"
+        >
+          <p className="text-[10px] tracking-ultrawide uppercase text-silver-dark mb-4">
+            Bize Ulaşın
+          </p>
+          <h1 className="font-serif text-5xl md:text-7xl text-black">
+            İletişim
+          </h1>
+        </motion.div>
+      </section>
+
+      {/* Contact Content */}
+      <section className="py-24 lg:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+            {/* Contact Info */}
+            <ScrollReveal direction="left">
+              <div className="space-y-12">
+                <div>
+                  <h2 className="font-serif text-3xl lg:text-4xl text-black mb-6">
+                    Birlikte
+                    <br />
+                    <span className="text-gradient-silver">Olağanüstü Bir Şey Yaratalım</span>
+                  </h2>
+                  <p className="text-silver-dark font-light leading-relaxed">
+                    İster imza kokunuzu arıyor olun, ister iş birliğiyle 
+                    ilgileniyor olun, ya da sadece bir sorunuz olsun, 
+                    sizden haber almaktan mutluluk duyarız.
+                  </p>
+                </div>
+
+                <div className="space-y-8">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-10 h-10 border border-black/20 flex items-center justify-center flex-shrink-0">
+                      <MapPin size={16} strokeWidth={1} className="text-silver" />
+                    </div>
+                    <div>
+                      <p className="text-xs tracking-ultrawide uppercase text-silver mb-1">
+                        Ana Mağaza
+                      </p>
+                      <p className="text-silver-dark font-light">
+                        Nişantaşı Caddesi No: 123
+                        <br />
+                        İstanbul, Türkiye
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <div className="w-10 h-10 border border-black/20 flex items-center justify-center flex-shrink-0">
+                      <Mail size={16} strokeWidth={1} className="text-silver" />
+                    </div>
+                    <div>
+                      <p className="text-xs tracking-ultrawide uppercase text-silver mb-1">
+                        E-posta
+                      </p>
+                      <p className="text-silver-dark font-light">
+                        iletisim@mrokay.com
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <div className="w-10 h-10 border border-black/20 flex items-center justify-center flex-shrink-0">
+                      <Phone size={16} strokeWidth={1} className="text-silver" />
+                    </div>
+                    <div>
+                      <p className="text-xs tracking-ultrawide uppercase text-silver mb-1">
+                        Telefon
+                      </p>
+                      <p className="text-silver-dark font-light">
+                        +90 (212) 555 01 23
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-8 border-t border-black/10">
+                  <p className="text-xs tracking-ultrawide uppercase text-silver mb-4">
+                    Çalışma Saatleri
+                  </p>
+                  <div className="space-y-2 text-silver-dark font-light text-sm">
+                    <p>Pazartesi – Cuma: 10:00 – 19:00</p>
+                    <p>Cumartesi: 11:00 – 18:00</p>
+                    <p>Pazar: Kapalı</p>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Contact Form */}
+            <ScrollReveal direction="right" delay={0.2}>
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-xs tracking-ultrawide uppercase text-silver mb-3">
+                      Ad Soyad
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
+                      className="w-full bg-transparent border-b border-black/20 py-3 text-black font-light focus:outline-none focus:border-silver transition-colors"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs tracking-ultrawide uppercase text-silver mb-3">
+                      E-posta
+                    </label>
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
+                      className="w-full bg-transparent border-b border-black/20 py-3 text-black font-light focus:outline-none focus:border-silver transition-colors"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs tracking-ultrawide uppercase text-silver mb-3">
+                    Konu
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.subject}
+                    onChange={(e) =>
+                      setFormData({ ...formData, subject: e.target.value })
+                    }
+                    className="w-full bg-transparent border-b border-black/20 py-3 text-black font-light focus:outline-none focus:border-silver transition-colors"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs tracking-ultrawide uppercase text-silver mb-3">
+                    Mesaj
+                  </label>
+                  <textarea
+                    value={formData.message}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
+                    rows={5}
+                    className="w-full bg-transparent border-b border-black/20 py-3 text-black font-light focus:outline-none focus:border-silver transition-colors resize-none"
+                    required
+                  />
+                </div>
+
+                <div className="pt-4">
+                  <MagneticButton type="submit" variant="primary" size="lg">
+                    Mesaj Gönder
+                  </MagneticButton>
+                </div>
+              </form>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
