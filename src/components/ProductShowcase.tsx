@@ -4,41 +4,9 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
 import ProductCard from "./ProductCard";
+import { getFeaturedProducts } from "@/data/products";
 
-const featuredProducts = [
-  {
-    id: "noir-absolute",
-    name: "Noir Absolute",
-    collection: "Avangard",
-    price: 295.00,
-    image: "/products/noir-absolute.jpg",
-    category: "İş Adamı",
-  },
-  {
-    id: "silver-mist",
-    name: "Silver Mist",
-    collection: "Zarif",
-    price: 245.00,
-    image: "/products/silver-mist.jpg",
-    category: "İş Adamı",
-  },
-  {
-    id: "midnight-silk",
-    name: "Midnight Silk",
-    collection: "Klasik",
-    price: 320.00,
-    image: "/products/midnight-silk.jpg",
-    category: "Akıllı Kadın",
-  },
-  {
-    id: "white-obsession",
-    name: "White Obsession",
-    collection: "Sınırlı Üretim",
-    price: 450.00,
-    image: "/products/white-obsession.jpg",
-    category: "Unisex",
-  },
-];
+const featuredProducts = getFeaturedProducts(4);
 
 export default function ProductShowcase() {
   const ref = useRef<HTMLDivElement>(null);

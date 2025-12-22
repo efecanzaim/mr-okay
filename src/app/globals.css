@@ -1,5 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Montserrat:wght@200;300;400;500;600;700&display=swap');
 
+@font-face {
+  font-family: 'Blacksword';
+  src: url('/fonts/Blacksword.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('/fonts/Avenir.otf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AvenirThin';
+  src: url('/fonts/AvenirThin.ttf') format('truetype');
+  font-weight: 200 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.header-font {
+  font-family: 'Avenir', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -121,6 +149,14 @@ body {
 
   .grayscale-video {
     filter: grayscale(100%) contrast(1.1);
+  }
+
+  .header-font {
+    font-family: 'Avenir', 'Montserrat', system-ui, sans-serif;
+  }
+
+  .avenir-thin {
+    font-family: 'AvenirThin', 'Avenir', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   }
 }
 

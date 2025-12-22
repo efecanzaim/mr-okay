@@ -43,12 +43,12 @@ export default function ProductCard({ product, index }: ProductCardProps) {
           onMouseLeave={() => setIsHovered(false)}
         >
           {/* Image Container */}
-          <div className="relative aspect-[3/4] bg-gray-100 overflow-hidden mb-6">
+          <div className="relative aspect-[3/4] bg-silver-light overflow-hidden mb-6">
             {/* Placeholder image - grayscale effect */}
             <motion.div
               animate={{ scale: isHovered ? 1.05 : 1 }}
               transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-              className="w-full h-full bg-gradient-to-b from-gray-100 to-gray-200 grayscale"
+              className="w-full h-full bg-gradient-to-b from-silver-light to-silver grayscale"
             >
               {/* Replace with actual product image */}
               <div className="absolute inset-0 flex items-center justify-center">

@@ -9,26 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        black: {
-          DEFAULT: "#050505",
-          900: "#050505",
-          800: "#0a0a0a",
-          700: "#111111",
-          600: "#1a1a1a",
-          500: "#2a2a2a",
-        },
-        white: {
-          DEFAULT: "#FFFFFF",
-          900: "#FFFFFF",
-          800: "#F5F5F5",
-          700: "#EBEBEB",
-          600: "#E0E0E0",
-        },
+        black: "#050505",
+        white: "#FFFFFF",
         silver: {
           DEFAULT: "#C0C0C0",
           light: "#D4D4D4",
           dark: "#8B8B8B",
-          metallic: "#A8A8A8",
         },
       },
       fontFamily: {

@@ -87,7 +87,7 @@ export default function SmartwomanCollectionPage() {
             Koleksiyon
           </p>
           <h1 className="font-serif text-5xl md:text-7xl text-black">
-            Akıllı Kadın
+            SMARTWOMAN
           </h1>
           <p className="text-lg text-silver-dark font-light mt-4 max-w-xl mx-auto">
             Her notada zarif özgüven. Kendi kaderini şekillendiren kadınlar 
@@ -139,14 +139,14 @@ export default function SmartwomanCollectionPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-12 text-center">
           <ScrollReveal>
             <p className="text-[10px] tracking-ultrawide uppercase text-silver-dark mb-6">
-              Akıllı Kadın Felsefesi
+              SMARTWOMAN Felsefesi
             </p>
             <h2 className="font-serif text-3xl lg:text-4xl text-black mb-8 leading-tight">
               &ldquo;Güç gürültülü değildir. Odadan ayrıldıktan çok sonra 
               bile kalıcı olan sessiz özgüventir.&rdquo;
             </h2>
             <p className="text-silver-dark font-light leading-relaxed">
-              Akıllı Kadın koleksiyonu, modern kadınlığın çok yönlü doğasını 
+              SMARTWOMAN koleksiyonu, modern kadınlığın çok yönlü doğasını 
               kutlar. Toplantı odalarından gala gecelerine, bu kokular 
               güçlendirmek ve ilham vermek için tasarlandı.
             </p>

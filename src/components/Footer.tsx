@@ -6,9 +6,9 @@ import { Instagram, Facebook, Twitter } from "lucide-react";
 
 const footerLinks = {
   collections: [
-    { name: "İş Adamı", href: "/collections/businessman" },
-    { name: "Akıllı Kadın", href: "/collections/smartwoman" },
-    { name: "Sınırlı Üretim", href: "/collections/limited" },
+    { name: "BUSINESSMAN", href: "/collections/businessman" },
+    { name: "SMARTWOMAN", href: "/collections/smartwoman" },
+    { name: "LIMITED EDITION", href: "/collections/limited" },
   ],
   company: [
     { name: "Hikayemiz", href: "/about" },
@@ -26,7 +26,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-50 border-t border-black/5">
+    <footer className="bg-black border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Main Footer */}
         <div className="py-16 lg:py-24">
@@ -40,15 +40,15 @@ export default function Footer() {
               className="lg:col-span-4"
             >
               <Link href="/" className="inline-block mb-6">
-                <h2 className="font-serif text-3xl font-medium tracking-widest text-black">
+                <h2 className="font-serif text-3xl font-medium tracking-widest text-white">
                   MR OKAY
                 </h2>
-                <p className="text-[10px] tracking-ultrawide text-silver-dark uppercase mt-1">
+                <p className="text-[10px] tracking-ultrawide text-silver uppercase mt-1">
                   Parfümeri
                 </p>
               </Link>
-              <p className="text-sm text-silver-dark font-light leading-relaxed max-w-sm">
-                Farklı olmaya cesaret edenler için olağanüstü kokular yaratıyoruz. 
+              <p className="text-sm text-silver-light font-light leading-relaxed max-w-sm">
+                Farklı olmaya cesaret edenler için olağanüstü kokular yaratıyoruz.
                 Her koku, sofistike ve bireysellik hikayesi anlatır.
               </p>
               
@@ -59,7 +59,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -2 }}
-                  className="text-silver-dark hover:text-black transition-colors duration-300"
+                  className="text-silver hover:text-white transition-colors duration-300"
                 >
                   <Instagram size={18} strokeWidth={1.5} />
                 </motion.a>
@@ -68,7 +68,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -2 }}
-                  className="text-silver-dark hover:text-black transition-colors duration-300"
+                  className="text-silver hover:text-white transition-colors duration-300"
                 >
                   <Facebook size={18} strokeWidth={1.5} />
                 </motion.a>
@@ -77,7 +77,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -2 }}
-                  className="text-silver-dark hover:text-black transition-colors duration-300"
+                  className="text-silver hover:text-white transition-colors duration-300"
                 >
                   <Twitter size={18} strokeWidth={1.5} />
                 </motion.a>
@@ -93,7 +93,7 @@ export default function Footer() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.1 }}
               >
-                <h3 className="text-xs font-sans font-medium tracking-ultrawide uppercase text-black mb-6">
+                <h3 className="text-xs font-sans font-medium tracking-ultrawide uppercase text-white mb-6">
                   Koleksiyonlar
                 </h3>
                 <ul className="space-y-4">
@@ -101,7 +101,7 @@ export default function Footer() {
                     <li key={link.name}>
                       <Link
                         href={link.href}
-                        className="text-sm text-silver-dark hover:text-black transition-colors duration-300 font-light"
+                        className="text-sm text-silver hover:text-white transition-colors duration-300 font-light"
                       >
                         {link.name}
                       </Link>
@@ -117,7 +117,7 @@ export default function Footer() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <h3 className="text-xs font-sans font-medium tracking-ultrawide uppercase text-black mb-6">
+                <h3 className="text-xs font-sans font-medium tracking-ultrawide uppercase text-white mb-6">
                   Şirket
                 </h3>
                 <ul className="space-y-4">
@@ -125,7 +125,7 @@ export default function Footer() {
                     <li key={link.name}>
                       <Link
                         href={link.href}
-                        className="text-sm text-silver-dark hover:text-black transition-colors duration-300 font-light"
+                        className="text-sm text-silver hover:text-white transition-colors duration-300 font-light"
                       >
                         {link.name}
                       </Link>
@@ -141,7 +141,7 @@ export default function Footer() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
               >
-                <h3 className="text-xs font-sans font-medium tracking-ultrawide uppercase text-black mb-6">
+                <h3 className="text-xs font-sans font-medium tracking-ultrawide uppercase text-white mb-6">
                   Yasal
                 </h3>
                 <ul className="space-y-4">
@@ -149,7 +149,7 @@ export default function Footer() {
                     <li key={link.name}>
                       <Link
                         href={link.href}
-                        className="text-sm text-silver-dark hover:text-black transition-colors duration-300 font-light"
+                        className="text-sm text-silver hover:text-white transition-colors duration-300 font-light"
                       >
                         {link.name}
                       </Link>
@@ -162,12 +162,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="py-6 border-t border-black/5">
+        <div className="py-6 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-silver-dark font-light tracking-wide">
+            <p className="text-xs text-silver font-light tracking-wide">
               © {currentYear} Mr Okay Parfümeri. Tüm hakları saklıdır.
             </p>
-            <p className="text-xs text-silver-dark/50 font-light tracking-wide">
+            <p className="text-xs text-silver-dark font-light tracking-wide">
               Detaylara olan tutku ile üretildi.
             </p>
           </div>

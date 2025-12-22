@@ -48,7 +48,7 @@ export default function CollectionBanner() {
                     Erkekler İçin
                   </p>
                   <h3 className="font-serif text-3xl lg:text-4xl text-white mb-4 group-hover:text-silver-light transition-colors duration-500">
-                    İş Adamı
+                    BUSINESSMAN
                   </h3>
                   <p className="text-sm text-white/70 font-light max-w-sm">
                     Erkekliğin cesur ifadesi. Dikkat çeken kokular.
@@ -93,7 +93,7 @@ export default function CollectionBanner() {
                     Kadınlar İçin
                   </p>
                   <h3 className="font-serif text-3xl lg:text-4xl text-white mb-4 group-hover:text-silver-light transition-colors duration-500">
-                    Akıllı Kadın
+                    SMARTWOMAN
                   </h3>
                   <p className="text-sm text-white/70 font-light max-w-sm">
                     Her notada zarif güven. Güçlendiren kokular.
