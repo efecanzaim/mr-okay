@@ -1,0 +1,66 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { User, Heart, ShoppingBag, MapPin } from "lucide-react";
+
+const navItems = [
+  { href: "/account", icon: User, label: "Hesabım" },
+  { href: "/favorites", icon: Heart, label: "Favoriler" },
+  { href: "/cart", icon: ShoppingBag, label: "Sepetim" },
+  { href: "/stores", icon: MapPin, label: "Mağaza Bul" },
+];
+
+export default function MobileBottomNav() {
+  const pathname = usePathname();
+
+  return (
+    <motion.nav
+      initial={{ y: 100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+      className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white border-t border-black/10 shadow-lg"
+    >
+      <div className="flex items-center justify-around py-2 px-4 safe-area-bottom">
+        {navItems.map((item) => {
+          const isActive = pathname === item.href;
+          const Icon = item.icon;
+
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="flex flex-col items-center py-2 px-3 min-w-[64px]"
+            >
+              <motion.div
+                whileTap={{ scale: 0.9 }}
+                className="relative"
+              >
+                <Icon
+                  size={22}
+                  strokeWidth={isActive ? 1.5 : 1}
+                  className={`transition-colors duration-300 ${
+                    isActive ? "text-black" : "text-black/50"
+                  }`}
+                />
+                {item.href === "/cart" && (
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-black text-white text-[9px] rounded-full flex items-center justify-center font-medium">
+                    0
+                  </span>
+                )}
+              </motion.div>
+              <span
+                className={`text-[10px] mt-1 transition-colors duration-300 ${
+                  isActive ? "text-black font-medium" : "text-black/50"
+                }`}
+              >
+                {item.label}
+              </span>
+            </Link>
+          );
+        })}
+      </div>
+    </motion.nav>
+  );
+}

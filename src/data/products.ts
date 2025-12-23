@@ -22,10 +22,10 @@ export const products: Product[] = [
   {
     id: "classic",
     name: "Classic",
-    collection: "Businessman",
+    collection: "BUSINESSMAN",
     price: 1250,
     ml: 50,
-    image: "/products/classic.jpg",
+    image: "/products/classic.png",
     category: "businessman",
     subcategory: "classic",
     scent: {
@@ -41,10 +41,10 @@ export const products: Product[] = [
   {
     id: "avant-garde",
     name: "Avant-Garde",
-    collection: "Businessman",
+    collection: "BUSINESSMAN",
     price: 1250,
     ml: 50,
-    image: "/products/avant-garde.jpg",
+    image: "/products/avantgarde.png",
     category: "businessman",
     subcategory: "avant-garde",
     scent: {
@@ -60,10 +60,10 @@ export const products: Product[] = [
   {
     id: "elegant",
     name: "Elegant",
-    collection: "Businessman",
+    collection: "BUSINESSMAN",
     price: 1250,
     ml: 50,
-    image: "/products/elegant.jpg",
+    image: "/products/elegant.png",
     category: "businessman",
     subcategory: "elegant",
     scent: {
@@ -79,10 +79,10 @@ export const products: Product[] = [
   {
     id: "holiday",
     name: "Holiday",
-    collection: "Businessman",
+    collection: "BUSINESSMAN",
     price: 1250,
     ml: 50,
-    image: "/products/holiday.jpg",
+    image: "/products/holiday.png",
     category: "businessman",
     subcategory: "holiday",
     scent: {
@@ -98,10 +98,10 @@ export const products: Product[] = [
   {
     id: "weekend",
     name: "Weekend",
-    collection: "Businessman",
+    collection: "BUSINESSMAN",
     price: 1250,
     ml: 50,
-    image: "/products/weekend.jpg",
+    image: "/products/weekend.png",
     category: "businessman",
     subcategory: "weekend",
     scent: {

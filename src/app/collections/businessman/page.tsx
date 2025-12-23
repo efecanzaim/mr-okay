@@ -71,7 +71,7 @@ export default function BusinessmanCollectionPage() {
                     viewport={{ once: true }}
                   >
                     <p className="text-[10px] tracking-ultrawide uppercase text-silver-dark mb-3">
-                      {product.variant}
+                      {product.family}
                     </p>
                     <h2 className="font-serif text-3xl lg:text-4xl text-black mb-4">
                       {product.name}
@@ -84,18 +84,16 @@ export default function BusinessmanCollectionPage() {
                     <div className="mb-8 space-y-3">
                       <div className="flex items-start gap-3">
                         <span className="text-[10px] tracking-ultrawide uppercase text-silver-dark w-16">Üst</span>
-                        <span className="text-sm text-black">{product.scent.middle.join(", ")}</span>
+                        <span className="text-sm text-black">{product.scent.top.join(", ")}</span>
                       </div>
                       <div className="flex items-start gap-3">
                         <span className="text-[10px] tracking-ultrawide uppercase text-silver-dark w-16">Orta</span>
+                        <span className="text-sm text-black">{product.scent.middle.join(", ")}</span>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <span className="text-[10px] tracking-ultrawide uppercase text-silver-dark w-16">Alt</span>
                         <span className="text-sm text-black">{product.scent.base.join(", ")}</span>
                       </div>
-                      {product.alt_notes && (
-                        <div className="flex items-start gap-3">
-                          <span className="text-[10px] tracking-ultrawide uppercase text-silver-dark w-16">Alt</span>
-                          <span className="text-sm text-black">{product.alt_notes.join(", ")}</span>
-                        </div>
-                      )}
                     </div>
 
                     {/* Price */}

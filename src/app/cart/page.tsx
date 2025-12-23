@@ -2,28 +2,28 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Trash2, Minus, Plus } from "lucide-react";
 import MagneticButton from "@/components/MagneticButton";
+import { getProductById } from "@/data/products";
 
-// Sample cart data
-const cartItems = [
-  {
-    id: "noir-absolute",
-    name: "Noir Absolute",
-    collection: "Avant-Garde",
-    size: "100ml",
-    price: 8850,
-    quantity: 1,
-  },
-  {
-    id: "silver-knight",
-    name: "Silver Knight",
-    collection: "Klasik",
-    size: "50ml",
-    price: 6450,
-    quantity: 2,
-  },
+// Sample cart data using real products
+const cartItemsData = [
+  { productId: "classic", quantity: 1 },
+  { productId: "elegant", quantity: 2 },
 ];
+
+// Build cart items with full product data
+const cartItems = cartItemsData
+  .map((item) => {
+    const product = getProductById(item.productId);
+    if (!product) return null;
+    return {
+      ...product,
+      quantity: item.quantity,
+    };
+  })
+  .filter((item): item is NonNullable<typeof item> => item !== null);
 
 export default function CartPage() {
   const subtotal = cartItems.reduce(
@@ -56,9 +56,15 @@ export default function CartPage() {
                     className="flex gap-6 pb-8 border-b border-black/10"
                   >
                     {/* Product Image */}
-                    <div className="w-28 h-36 bg-gray-100 flex-shrink-0">
-                      <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200" />
-                    </div>
+                    <Link href={`/product/${item.id}`} className="w-28 h-36 bg-gray-100 flex-shrink-0 relative overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        className="object-cover hover:scale-105 transition-transform duration-500"
+                        sizes="112px"
+                      />
+                    </Link>
 
                     {/* Product Info */}
                     <div className="flex-1 flex flex-col justify-between">
@@ -72,7 +78,7 @@ export default function CartPage() {
                           </h3>
                         </Link>
                         <p className="text-sm text-silver-dark mt-1">
-                          {item.size}
+                          {item.ml}ml
                         </p>
                       </div>
 

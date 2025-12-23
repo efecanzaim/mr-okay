@@ -109,7 +109,7 @@ export default function Footer() {
         </div>
       </section>
 
-      <footer className="bg-black border-t border-white/10">
+      <footer className="bg-black border-t border-white/10 pb-20 lg:pb-0">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Main Footer */}
         <div className="py-16 lg:py-24">

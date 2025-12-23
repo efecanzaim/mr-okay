@@ -22,7 +22,7 @@ export default function MagneticButton({
 
   const variants = {
     primary:
-      "bg-black text-white hover:bg-gray-800",
+      "bg-white text-black border border-black hover:bg-black hover:text-white",
     secondary:
       "bg-gray-100 text-black border border-black/20 hover:border-black/40",
     outline:

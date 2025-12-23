@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function CollectionBanner() {
   const ref = useRef<HTMLDivElement>(null);
@@ -26,17 +27,18 @@ export default function CollectionBanner() {
             className="group"
           >
             <Link href="/collections/businessman">
-              <div className="relative aspect-[4/5] overflow-hidden bg-gray-200">
+              <div className="relative aspect-[4/5] overflow-hidden">
                 <motion.div
                   style={{ y }}
                   className="absolute inset-0 scale-110"
                 >
-                  <div className="w-full h-full bg-gradient-to-br from-gray-200 via-gray-300 to-gray-400">
-                    {/* Placeholder for image */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-32 h-48 bg-gradient-to-b from-silver-dark/20 to-transparent" />
-                    </div>
-                  </div>
+                  <Image
+                    src="/images/businessman_banner.jpg"
+                    alt="Businessman Collection"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
                 </motion.div>
                 
                 {/* Overlay */}
@@ -71,17 +73,18 @@ export default function CollectionBanner() {
             className="group"
           >
             <Link href="/collections/smartwoman">
-              <div className="relative aspect-[4/5] overflow-hidden bg-gray-200">
+              <div className="relative aspect-[4/5] overflow-hidden">
                 <motion.div
                   style={{ y }}
                   className="absolute inset-0 scale-110"
                 >
-                  <div className="w-full h-full bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300">
-                    {/* Placeholder for image */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-28 h-44 bg-gradient-to-b from-silver/20 to-transparent rounded-sm" />
-                    </div>
-                  </div>
+                  <Image
+                    src="/images/smartwoman_banner.jpg"
+                    alt="Smartwoman Collection"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
                 </motion.div>
                 
                 {/* Overlay */}

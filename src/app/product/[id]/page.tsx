@@ -3,55 +3,48 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 import { Minus, Plus, Heart, Share2 } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import MagneticButton from "@/components/MagneticButton";
 import ProductCard from "@/components/ProductCard";
+import { getProductById, products } from "@/data/products";
 
-// Sample product data - in real app, this would come from API
-const products: Record<string, {
-  id: string;
-  name: string;
-  collection: string;
-  price: number;
-  description: string;
-  notes: { top: string[]; heart: string[]; base: string[] };
-  sizes: { ml: number; price: number }[];
-}> = {
-  "noir-absolute": {
-    id: "noir-absolute",
-    name: "Noir Absolute",
-    collection: "Avant-Garde",
-    price: 8850,
-    description:
-      "Modern erkekliğin cesur bir beyanı. Noir Absolute, elektrikli bir karabiber ve bergamot patlamasıyla açılır, dumanlı ud ve deri kalbine evrilir. Taban sıcak amber ve sandal ağacını ortaya çıkararak unutulmaz bir iz bırakır.",
-    notes: {
-      top: ["Karabiber", "Bergamot", "Pembe Biber"],
-      heart: ["Ud", "Deri", "Safran"],
-      base: ["Amber", "Sandal Ağacı", "Misk"],
-    },
-    sizes: [
-      { ml: 30, price: 4350 },
-      { ml: 50, price: 6450 },
-      { ml: 100, price: 8850 },
-    ],
-  },
+// Helper function to get hover image path
+const getHoverImagePath = (imagePath: string): string => {
+  const lastDotIndex = imagePath.lastIndexOf('.');
+  if (lastDotIndex === -1) return imagePath;
+  return imagePath.slice(0, lastDotIndex) + '_hover' + imagePath.slice(lastDotIndex);
 };
-
-const relatedProducts = [
-  { id: "midnight-deal", name: "Midnight Deal", collection: "Avant-Garde", price: 10500, image: "", category: "Avant-Garde" },
-  { id: "silver-knight", name: "Silver Knight", collection: "Klasik", price: 7350, image: "", category: "Klasik" },
-  { id: "boardroom", name: "Boardroom", collection: "Zarif", price: 9600, image: "", category: "Zarif" },
-  { id: "urban-legend", name: "Urban Legend", collection: "Hafta Sonu", price: 5550, image: "", category: "Hafta Sonu" },
-];
 
 export default function ProductPage() {
   const params = useParams();
   const productId = params.id as string;
-  const product = products[productId] || products["noir-absolute"];
-  
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+  const product = getProductById(productId);
+
   const [quantity, setQuantity] = useState(1);
+  const [isImageHovered, setIsImageHovered] = useState(false);
+
+  // Get related products (exclude current product)
+  const relatedProducts = products
+    .filter((p) => p.id !== productId)
+    .slice(0, 4)
+    .map((p) => ({
+      id: p.id,
+      name: p.name,
+      collection: p.collection,
+      price: p.price,
+      image: p.image,
+      category: p.category,
+    }));
+
+  if (!product) {
+    return (
+      <div className="bg-white min-h-screen pt-24 flex items-center justify-center">
+        <p className="text-silver-dark">Ürün bulunamadı</p>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white min-h-screen pt-24">
@@ -65,10 +58,43 @@ export default function ProductPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1 }}
             >
-              <div className="relative aspect-[3/4] bg-gray-100 sticky top-32">
-                <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                  <div className="w-32 h-48 bg-gradient-to-b from-silver-dark/20 to-transparent" />
-                </div>
+              <div
+                className="relative aspect-[3/4] bg-gray-100 sticky top-32 overflow-hidden cursor-pointer"
+                onMouseEnter={() => setIsImageHovered(true)}
+                onMouseLeave={() => setIsImageHovered(false)}
+              >
+                {/* Default Image */}
+                <motion.div
+                  initial={{ opacity: 1 }}
+                  animate={{ opacity: isImageHovered ? 0 : 1 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority
+                  />
+                </motion.div>
+
+                {/* Hover Image */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: isImageHovered ? 1 : 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={getHoverImagePath(product.image)}
+                    alt={`${product.name} hover`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </motion.div>
               </div>
             </motion.div>
 
@@ -87,34 +113,21 @@ export default function ProductPage() {
                   {product.name}
                 </h1>
                 <p className="text-2xl text-silver font-light">
-                  ₺{selectedSize.price.toLocaleString('tr-TR')}
+                  ₺{product.price.toLocaleString('tr-TR')}
                 </p>
+                <p className="text-sm text-silver-dark mt-1">{product.ml}ml</p>
               </div>
 
               <p className="text-silver-dark font-light leading-relaxed">
                 {product.description}
               </p>
 
-              {/* Size Selection */}
+              {/* Family */}
               <div>
-                <p className="text-xs tracking-ultrawide uppercase text-silver mb-4">
-                  Boyut
+                <p className="text-xs tracking-ultrawide uppercase text-silver mb-2">
+                  Koku Ailesi
                 </p>
-                <div className="flex gap-4">
-                  {product.sizes.map((size) => (
-                    <button
-                      key={size.ml}
-                      onClick={() => setSelectedSize(size)}
-                      className={`px-6 py-3 border text-sm transition-all duration-300 ${
-                        selectedSize.ml === size.ml
-                          ? "border-black text-black"
-                          : "border-black/20 text-silver-dark hover:border-black/40"
-                      }`}
-                    >
-                      {size.ml}ml
-                    </button>
-                  ))}
-                </div>
+                <p className="text-black font-light">{product.family}</p>
               </div>
 
               {/* Quantity */}
@@ -171,7 +184,7 @@ export default function ProductPage() {
                       Üst
                     </p>
                     <div className="space-y-2">
-                      {product.notes.top.map((note) => (
+                      {product.scent.top.map((note) => (
                         <p key={note} className="text-sm text-black font-light">
                           {note}
                         </p>
@@ -183,7 +196,7 @@ export default function ProductPage() {
                       Kalp
                     </p>
                     <div className="space-y-2">
-                      {product.notes.heart.map((note) => (
+                      {product.scent.middle.map((note) => (
                         <p key={note} className="text-sm text-black font-light">
                           {note}
                         </p>
@@ -195,7 +208,7 @@ export default function ProductPage() {
                       Taban
                     </p>
                     <div className="space-y-2">
-                      {product.notes.base.map((note) => (
+                      {product.scent.base.map((note) => (
                         <p key={note} className="text-sm text-black font-light">
                           {note}
                         </p>

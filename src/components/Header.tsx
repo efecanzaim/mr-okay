@@ -4,14 +4,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ShoppingBag, Menu, X, User, Heart, Mail, Search } from "lucide-react";
+import Image from "next/image";
+import { ShoppingBag, Menu, X, User, Heart, Mail, Search, MapPin } from "lucide-react";
+// Note: Some icons are used only in desktop view
 
 const businessmanCategories = [
-  { name: "Classic", href: "/collections/businessman/classic", description: "Klasik, disiplinli, özgüvenli" },
-  { name: "Avant-Garde", href: "/collections/businessman/avant-garde", description: "Yaratıcı, özgün, cesur" },
-  { name: "Elegant", href: "/collections/businessman/elegant", description: "Sofistike, zarif ve entelektüel" },
-  { name: "Holiday", href: "/collections/businessman/holiday", description: "Hayatı dolu dolu yaşayan" },
-  { name: "Weekend", href: "/collections/businessman/weekend", description: "Rahat, modern ve hafif" },
+  { name: "Classic", href: "/collections/businessman/classic", description: "Klasik, disiplinli, özgüvenli", image: "/products/classic.png" },
+  { name: "Avant-Garde", href: "/collections/businessman/avant-garde", description: "Yaratıcı, özgün, cesur", image: "/products/avantgarde.png" },
+  { name: "Elegant", href: "/collections/businessman/elegant", description: "Sofistike, zarif ve entelektüel", image: "/products/elegant.png" },
+  { name: "Holiday", href: "/collections/businessman/holiday", description: "Hayatı dolu dolu yaşayan", image: "/products/holiday.png" },
+  { name: "Weekend", href: "/collections/businessman/weekend", description: "Rahat, modern ve hafif", image: "/products/weekend.png" },
 ];
 
 export default function Header() {
@@ -23,33 +25,62 @@ export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [logoAnimationComplete, setLogoAnimationComplete] = useState(false);
   const [showNavigation, setShowNavigation] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const megaMenuRef = useRef<HTMLDivElement>(null);
   const megaMenuTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Check if mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Handle animation state based on page
+  useEffect(() => {
+    if (isHomePage) {
+      // Reset animation when returning to home page (only if at top of page)
+      if (window.scrollY === 0) {
+        setLogoAnimationComplete(false);
+        setShowNavigation(false);
+      }
+    } else {
+      // Immediately show normal logo on other pages
+      setLogoAnimationComplete(true);
+      setShowNavigation(true);
+    }
+  }, [isHomePage]);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollYValue = window.scrollY;
 
-      // Trigger animation based on scroll position
-      if (scrollYValue > 0) {
-        if (!logoAnimationComplete) {
-          setLogoAnimationComplete(true);
-          // Show navigation after a delay
-          setTimeout(() => {
-            setShowNavigation(true);
-          }, 800);
+      // Only run animation logic on home page
+      if (isHomePage) {
+        // Trigger animation based on scroll position
+        if (scrollYValue > 0) {
+          if (!logoAnimationComplete) {
+            setLogoAnimationComplete(true);
+            // Show navigation after a delay
+            setTimeout(() => {
+              setShowNavigation(true);
+            }, 800);
+          }
+        } else {
+          // Reset to initial state when scroll is at top
+          setLogoAnimationComplete(false);
+          setShowNavigation(false);
         }
-      } else {
-        // Reset to initial state when scroll is at top
-        setLogoAnimationComplete(false);
-        setShowNavigation(false);
       }
 
       setIsScrolled(scrollYValue > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [logoAnimationComplete]);
+  }, [logoAnimationComplete, isHomePage]);
 
   const handleMegaMenuEnter = () => {
     if (megaMenuTimeoutRef.current) {
@@ -110,17 +141,18 @@ export default function Header() {
             {isHomePage ? (
               // Animated logo for home page - starts at center, moves to header on scroll
               <Link
+                key="home-logo"
                 href="/"
-                className={`absolute left-1/2 -translate-x-1/2 z-50 ${!logoAnimationComplete ? 'pointer-events-none' : ''}`}
+                className={`absolute left-1/2 -translate-x-1/2 z-50 ${!logoAnimationComplete ? 'pointer-events-none' : ''} ${isMobileMenuOpen ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
               >
                 <motion.div
                   initial={{
                     y: "20vh",
-                    scale: 5,
+                    scale: isMobile ? 2.5 : 5,
                   }}
                   animate={{
                     y: logoAnimationComplete ? "0px" : "20vh",
-                    scale: logoAnimationComplete ? 1 : 5,
+                    scale: logoAnimationComplete ? 1 : (isMobile ? 2.5 : 5),
                   }}
                   transition={{
                     duration: 1.2,
@@ -136,11 +168,10 @@ export default function Header() {
                 </motion.div>
               </Link>
             ) : (
-              // Static logo for other pages
-              <Link href="/" className="absolute left-1/2 -translate-x-1/2">
+              // Static logo for other pages - no animation, just appears in place
+              <Link key="other-logo" href="/" className="absolute left-1/2 -translate-x-1/2">
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  initial={false}
                   whileHover={{ scale: 1.05 }}
                   className="text-center"
                 >
@@ -193,6 +224,24 @@ export default function Header() {
                   </motion.div>
                 </button>
               </div>
+
+              {/* Store Locator Icon */}
+              <Link href="/stores" className="group">
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <MapPin
+                    size={26}
+                    strokeWidth={1}
+                    className={`transition-colors duration-500 ${
+                      isHomePage && !logoAnimationComplete
+                        ? 'text-white/70 group-hover:text-white'
+                        : 'text-black/70 group-hover:text-black'
+                    }`}
+                  />
+                </motion.div>
+              </Link>
 
               {/* Contact Icon */}
               <Link href="/contact" className="group">
@@ -275,16 +324,12 @@ export default function Header() {
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="lg:hidden flex items-center space-x-6">
-              <Link href="/cart" className="relative">
-                <ShoppingBag size={20} strokeWidth={1} className="text-black" />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-black text-white text-[10px] rounded-full flex items-center justify-center font-medium">
-                  0
-                </span>
-              </Link>
+            <div className="lg:hidden ml-auto">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-black"
+                className={`transition-colors duration-300 ${
+                  isMobileMenuOpen ? 'text-black' : (isHomePage && !logoAnimationComplete ? 'text-white' : 'text-black')
+                }`}
               >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -319,8 +364,14 @@ export default function Header() {
                         className="group block"
                         onClick={() => setIsMegaMenuOpen(false)}
                       >
-                        <div className="aspect-[3/4] bg-silver-light mb-4 overflow-hidden">
-                          <div className="w-full h-full bg-gradient-to-b from-silver-light to-silver group-hover:scale-105 transition-transform duration-700" />
+                        <div className="aspect-[3/4] bg-silver-light mb-4 overflow-hidden relative">
+                          <Image
+                            src={category.image}
+                            alt={category.name}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-700"
+                            sizes="20vw"
+                          />
                         </div>
                         <h3 className="font-serif text-lg text-black group-hover:text-silver-dark transition-colors duration-300">
                           {category.name}
@@ -361,57 +412,89 @@ export default function Header() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="flex flex-col items-center justify-center h-full space-y-8"
+              className="flex flex-col items-center justify-center h-full px-8"
             >
-              <Link
-                href="/about"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="font-serif text-3xl text-black hover:text-silver-dark transition-colors header-font"
-              >
-                Mr. Okay
-              </Link>
+              {/* Ana Menü Linkleri */}
+              <div className="space-y-6 text-center">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <Link
+                    href="/about"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block font-serif text-2xl text-black hover:text-silver-dark transition-colors"
+                  >
+                    Hakkımızda
+                  </Link>
+                </motion.div>
 
-              <div className="text-center">
-                <p className="font-serif text-3xl text-black mb-4">Businessman</p>
-                <div className="space-y-3">
-                  {businessmanCategories.map((cat) => (
-                    <Link
-                      key={cat.name}
-                      href={cat.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="block text-sm text-silver-dark hover:text-black transition-colors"
-                    >
-                      {cat.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
+                {/* Businessman */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="pt-4"
+                >
+                  <Link
+                    href="/collections/businessman"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block font-serif text-2xl text-black hover:text-silver-dark transition-colors mb-4"
+                  >
+                    {'Businessman'.toLocaleUpperCase('en-US')}
+                  </Link>
+                  <div className="space-y-2">
+                    {businessmanCategories.map((cat, index) => (
+                      <motion.div
+                        key={cat.name}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.5 + index * 0.05 }}
+                      >
+                        <Link
+                          href={cat.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="block text-sm text-silver-dark hover:text-black transition-colors py-1"
+                        >
+                          {cat.name}
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
 
-              <Link
-                href="/collections/smartwoman"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="font-serif text-3xl text-black hover:text-silver-dark transition-colors"
-              >
-                SMARTWOMAN
-              </Link>
+                {/* Smartwoman */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                  className="pt-4"
+                >
+                  <Link
+                    href="/collections/smartwoman"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block font-serif text-2xl text-black hover:text-silver-dark transition-colors"
+                  >
+                    {'Smartwoman'.toLocaleUpperCase('en-US')}
+                  </Link>
+                </motion.div>
 
-              {/* Mobile Icons */}
-              <div className="flex items-center space-x-8 mt-8">
-                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Mail size={28} strokeWidth={1} className="text-black" />
-                </Link>
-                <Link href="/account" onClick={() => setIsMobileMenuOpen(false)}>
-                  <User size={28} strokeWidth={1} className="text-black" />
-                </Link>
-                <Link href="/favorites" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Heart size={28} strokeWidth={1} className="text-black" />
-                </Link>
-                <Link href="/cart" onClick={() => setIsMobileMenuOpen(false)} className="relative">
-                  <ShoppingBag size={28} strokeWidth={1} className="text-black" />
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-black text-white text-[10px] rounded-full flex items-center justify-center font-medium">
-                    0
-                  </span>
-                </Link>
+                {/* İletişim */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 }}
+                  className="pt-4"
+                >
+                  <Link
+                    href="/contact"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block font-serif text-2xl text-black hover:text-silver-dark transition-colors"
+                  >
+                    İletişim
+                  </Link>
+                </motion.div>
               </div>
             </motion.nav>
           </motion.div>
