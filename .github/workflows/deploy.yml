@@ -33,11 +33,21 @@ jobs:
         run: npm ci
 
       - name: Set basePath
+        id: set-basepath
         run: |
-          # Repository adını al (örn: username/mr-okay -> mr-okay)
+          # Repository adını al (örn: efecanzaim/mr-okay -> mr-okay)
           REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
-          echo "NEXT_PUBLIC_BASE_PATH=/$REPO_NAME" >> $GITHUB_ENV
-          echo "BasePath set to: /$REPO_NAME"
+          # Eğer repository adı username.github.io formatında ise basePath kullanma
+          if [[ "$REPO_NAME" == *.github.io ]]; then
+            echo "Repository is *.github.io format, basePath will be empty"
+            BASE_PATH=""
+          else
+            echo "Repository name: $REPO_NAME"
+            BASE_PATH="/$REPO_NAME"
+          fi
+          echo "BASE_PATH=$BASE_PATH" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_BASE_PATH=$BASE_PATH" >> $GITHUB_ENV
+          echo "BasePath set to: $BASE_PATH"
 
       - name: Build
         run: npm run build
