@@ -123,12 +123,11 @@ export default function Footer() {
               className="lg:col-span-4"
             >
               <Link href="/" className="inline-block mb-6">
-                <h2 className="font-serif text-3xl font-medium tracking-widest text-white">
-                  MR OKAY
-                </h2>
-                <p className="text-[10px] tracking-ultrawide text-silver uppercase mt-1">
-                  Parfümeri
-                </p>
+                <div className="text-center">
+                  <h1 className="text-3xl lg:text-4xl font-normal text-white" style={{ fontFamily: 'Blacksword, serif', fontStyle: 'normal', letterSpacing: '0' }}>
+                    Mr. Okay
+                  </h1>
+                </div>
               </Link>
               <p className="text-sm text-silver-light font-light leading-relaxed max-w-sm">
                 Farklı olmaya cesaret edenler için olağanüstü kokular yaratıyoruz.
