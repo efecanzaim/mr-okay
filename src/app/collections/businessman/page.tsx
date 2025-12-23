@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import ProductCard from "@/components/ProductCard";
+import Image from "next/image";
+import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import { getProductsByCategory } from "@/data/products";
 
@@ -26,47 +27,94 @@ export default function BusinessmanCollectionPage() {
             BUSINESSMAN
           </h1>
           <p className="text-lg text-silver-dark font-light mt-4 max-w-xl mx-auto">
-            Erkekliğin cesur ifadeleri. Dikkat çeken ve kalıcı izlenimler 
+            Erkekliğin cesur ifadeleri. Dikkat çeken ve kalıcı izlenimler
             bırakan kokular.
           </p>
         </motion.div>
       </section>
 
-      {/* Filter Bar */}
-      <section className="py-8 border-b border-black/5">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-4">
-              {["Tümü", "Klasik", "Avangard", "Zarif", "Tatil", "Hafta Sonu"].map(
-                (filter) => (
-                  <button
-                    key={filter}
-                    className={`text-xs tracking-ultrawide uppercase py-2 px-4 border transition-all duration-300 ${
-                      filter === "Tümü"
-                        ? "border-black text-black"
-                        : "border-black/20 text-silver-dark hover:border-black/40 hover:text-black"
-                    }`}
-                  >
-                    {filter}
-                  </button>
-                )
-              )}
-            </div>
-            <p className="text-xs text-silver-dark">
-              {businessmanProducts.length} Ürün
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Product Grid */}
+      {/* Product Showcase - Alternating Layout */}
       <section className="py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-            {businessmanProducts.map((product, index) => (
-              <ProductCard key={product.id} product={product} index={index} />
-            ))}
-          </div>
+          {businessmanProducts.map((product, index) => {
+            const isEven = index % 2 === 0;
+
+            return (
+              <ScrollReveal key={product.id}>
+                <div
+                  className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-8 lg:gap-16 py-16 lg:py-24 ${index !== 0 ? 'border-t border-black/5' : ''}`}
+                >
+                  {/* Product Image */}
+                  <motion.div
+                    className="w-full lg:w-1/2"
+                    initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="relative aspect-square bg-gradient-to-br from-silver-light/20 to-white overflow-hidden">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-contain p-8"
+                      />
+                    </div>
+                  </motion.div>
+
+                  {/* Product Info */}
+                  <motion.div
+                    className={`w-full lg:w-1/2 ${isEven ? 'lg:pl-8' : 'lg:pr-8'}`}
+                    initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    viewport={{ once: true }}
+                  >
+                    <p className="text-[10px] tracking-ultrawide uppercase text-silver-dark mb-3">
+                      {product.variant}
+                    </p>
+                    <h2 className="font-serif text-3xl lg:text-4xl text-black mb-4">
+                      {product.name}
+                    </h2>
+                    <p className="text-silver-dark font-light leading-relaxed mb-6">
+                      {product.description}
+                    </p>
+
+                    {/* Scent Notes */}
+                    <div className="mb-8 space-y-3">
+                      <div className="flex items-start gap-3">
+                        <span className="text-[10px] tracking-ultrawide uppercase text-silver-dark w-16">Üst</span>
+                        <span className="text-sm text-black">{product.scent.middle.join(", ")}</span>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <span className="text-[10px] tracking-ultrawide uppercase text-silver-dark w-16">Orta</span>
+                        <span className="text-sm text-black">{product.scent.base.join(", ")}</span>
+                      </div>
+                      {product.alt_notes && (
+                        <div className="flex items-start gap-3">
+                          <span className="text-[10px] tracking-ultrawide uppercase text-silver-dark w-16">Alt</span>
+                          <span className="text-sm text-black">{product.alt_notes.join(", ")}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Price */}
+                    <p className="text-2xl text-black mb-8">
+                      {product.price.toLocaleString("tr-TR")} ₺
+                    </p>
+
+                    {/* Discover Button */}
+                    <Link
+                      href={`/product/${product.id}`}
+                      className="inline-block border border-black px-8 py-4 text-xs tracking-ultrawide uppercase text-black hover:bg-black hover:text-white transition-all duration-300"
+                    >
+                      Keşfet
+                    </Link>
+                  </motion.div>
+                </div>
+              </ScrollReveal>
+            );
+          })}
         </div>
       </section>
 
@@ -78,12 +126,12 @@ export default function BusinessmanCollectionPage() {
               BUSINESSMAN Felsefesi
             </p>
             <h2 className="font-serif text-3xl lg:text-4xl text-black mb-8 leading-tight">
-              &ldquo;Başarının bir kokusu var. Tek kelime etmeden önce 
+              &ldquo;Başarının bir kokusu var. Tek kelime etmeden önce
               giydiğiniz özgüven o.&rdquo;
             </h2>
             <p className="text-silver-dark font-light leading-relaxed">
-              BUSINESSMAN koleksiyonu, ilk izlenimlerin önemini anlayan erkekler 
-              için tasarlandı. Bu koleksiyondaki her koku, otorite, 
+              BUSINESSMAN koleksiyonu, ilk izlenimlerin önemini anlayan erkekler
+              için tasarlandı. Bu koleksiyondaki her koku, otorite,
               sofistike ve unutulmaz bir varlık yansıtmak için tasarlandı.
             </p>
           </ScrollReveal>

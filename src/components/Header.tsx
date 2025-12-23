@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ShoppingBag, Menu, X, ChevronDown, User, Heart, Mail, Search } from "lucide-react";
+import { ShoppingBag, Menu, X, User, Heart, Mail, Search } from "lucide-react";
 
 const businessmanCategories = [
   { name: "Classic", href: "/collections/businessman/classic", description: "Klasik, disiplinli, özgüvenli" },
@@ -72,42 +72,35 @@ export default function Header() {
         transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
           isScrolled
-            ? "glass py-4 shadow-sm"
-            : "bg-transparent py-6"
+            ? "glass py-6 shadow-sm"
+            : "bg-transparent py-10"
         }`}
       >
-        <nav className="max-w-7xl mx-auto px-6 lg:px-12">
+        <nav className="w-full px-4 lg:px-6">
           <div className="flex items-center justify-between">
             {/* Left Navigation - hidden on home page when not scrolled */}
-            <div className={`hidden lg:flex items-center space-x-12 transition-opacity duration-500 ${
+            <div className={`hidden lg:flex items-center space-x-8 transition-opacity duration-500 ${
               isHomePage && !showNavigation ? 'opacity-0 pointer-events-none' : 'opacity-100'
             }`}>
               <Link
                 href="/about"
-                className="text-xs font-sans font-medium tracking-ultrawide uppercase text-black/70 hover:text-black transition-colors duration-400 line-through-hover header-font"
+                className="text-base font-sans font-medium uppercase text-black/70 hover:text-black transition-colors duration-400 line-through-hover header-font"
               >
                 Mr. Okay
               </Link>
 
-              <div
-                className="relative"
+              <Link
+                href="/collections/businessman"
+                className="text-base font-sans font-light uppercase text-black/70 hover:text-black transition-colors duration-400 line-through-hover header-font"
                 onMouseEnter={handleMegaMenuEnter}
                 onMouseLeave={handleMegaMenuLeave}
               >
-                <button className="flex items-center space-x-1 text-xs font-sans font-light tracking-ultrawide uppercase text-black/70 hover:text-black transition-colors duration-400 header-font">
-                  <span>BUSINESSMAN</span>
-                  <ChevronDown
-                    size={12}
-                    className={`transition-transform duration-300 ${
-                      isMegaMenuOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-              </div>
+                BUSINESSMAN
+              </Link>
 
               <Link
                 href="/collections/smartwoman"
-                className="text-xs font-sans font-light tracking-ultrawide uppercase text-black/70 hover:text-black transition-colors duration-400 line-through-hover header-font"
+                className="text-base font-sans font-light uppercase text-black/70 hover:text-black transition-colors duration-400 line-through-hover header-font"
               >
                 SMARTWOMAN
               </Link>
@@ -135,7 +128,7 @@ export default function Header() {
                   }}
                 >
                   <h1
-                    className={`text-2xl lg:text-3xl font-normal whitespace-nowrap origin-center ${!logoAnimationComplete ? 'text-white' : 'text-black'}`}
+                    className={`text-3xl lg:text-4xl font-normal whitespace-nowrap origin-center ${!logoAnimationComplete ? 'text-white' : 'text-black'}`}
                     style={{ fontFamily: 'Blacksword, serif', fontStyle: 'normal', letterSpacing: '0' }}
                   >
                     Mr. Okay
@@ -151,7 +144,7 @@ export default function Header() {
                   whileHover={{ scale: 1.05 }}
                   className="text-center"
                 >
-                  <h1 className="text-2xl lg:text-3xl font-normal text-black" style={{ fontFamily: 'Blacksword, serif', fontStyle: 'normal', letterSpacing: '0' }}>
+                  <h1 className="text-3xl lg:text-4xl font-normal text-black" style={{ fontFamily: 'Blacksword, serif', fontStyle: 'normal', letterSpacing: '0' }}>
                     Mr. Okay
                   </h1>
                 </motion.div>
@@ -159,7 +152,7 @@ export default function Header() {
             )}
 
             {/* Right Navigation - Always visible */}
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-6">
               {/* Search Icon & Bar */}
               <div className="relative flex items-center">
                 <AnimatePresence>
@@ -189,7 +182,7 @@ export default function Header() {
                     transition={{ duration: 0.3 }}
                   >
                     <Search
-                      size={20}
+                      size={26}
                       strokeWidth={1.5}
                       className={`transition-colors duration-500 ${
                         isHomePage && !logoAnimationComplete
@@ -208,7 +201,7 @@ export default function Header() {
                   transition={{ duration: 0.3 }}
                 >
                   <Mail
-                    size={20}
+                    size={26}
                     strokeWidth={1}
                     className={`transition-colors duration-500 ${
                       isHomePage && !logoAnimationComplete
@@ -226,7 +219,7 @@ export default function Header() {
                   transition={{ duration: 0.3 }}
                 >
                   <User
-                    size={20}
+                    size={26}
                     strokeWidth={1}
                     className={`transition-colors duration-500 ${
                       isHomePage && !logoAnimationComplete
@@ -244,7 +237,7 @@ export default function Header() {
                   transition={{ duration: 0.3 }}
                 >
                   <Heart
-                    size={20}
+                    size={26}
                     strokeWidth={1}
                     className={`transition-colors duration-500 ${
                       isHomePage && !logoAnimationComplete
@@ -262,7 +255,7 @@ export default function Header() {
                   transition={{ duration: 0.3 }}
                 >
                   <ShoppingBag
-                    size={20}
+                    size={26}
                     strokeWidth={1}
                     className={`transition-colors duration-500 ${
                       isHomePage && !logoAnimationComplete
@@ -312,7 +305,7 @@ export default function Header() {
               onMouseLeave={handleMegaMenuLeave}
               className="absolute top-full left-0 right-0 bg-white shadow-lg"
             >
-              <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
+              <div className="w-full px-4 lg:px-6 py-12">
                 <div className="grid grid-cols-5 gap-8">
                   {businessmanCategories.map((category, index) => (
                     <motion.div

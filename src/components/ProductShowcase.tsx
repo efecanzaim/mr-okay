@@ -6,7 +6,7 @@ import Link from "next/link";
 import ProductCard from "./ProductCard";
 import { getFeaturedProducts } from "@/data/products";
 
-const featuredProducts = getFeaturedProducts(4);
+const featuredProducts = getFeaturedProducts(5);
 
 export default function ProductShowcase() {
   const ref = useRef<HTMLDivElement>(null);
@@ -14,7 +14,7 @@ export default function ProductShowcase() {
 
   return (
     <section ref={ref} className="py-24 lg:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="w-full px-6 lg:px-12">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -35,7 +35,7 @@ export default function ProductShowcase() {
         </motion.div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8">
           {featuredProducts.map((product, index) => (
             <ProductCard key={product.id} product={product} index={index} />
           ))}

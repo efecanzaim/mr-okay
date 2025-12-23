@@ -2,7 +2,6 @@ export interface Product {
   id: string;
   name: string;
   collection: string;
-  variant: string;
   price: number;
   ml: number;
   image: string;
@@ -21,107 +20,97 @@ export interface Product {
 export const products: Product[] = [
   // BUSINESSMAN - CLASSIC
   {
-    id: "fougere-classic",
-    name: "Fougère",
+    id: "classic",
+    name: "Classic",
     collection: "Businessman",
-    variant: "Classic",
     price: 1250,
     ml: 50,
-    image: "/products/fougere.jpg",
+    image: "/products/classic.jpg",
     category: "businessman",
     subcategory: "classic",
     scent: {
-      top: ["Seffaf Şişe", "Gümüş Rengi Kapak ve Valf", "Siyah Baskı"],
-      middle: ["Bergamot", "Lavanta"],
-      base: ["Geranyum", "Adaçayı"],
+      top: ["Bergamot", "Lavanta"],
+      middle: ["Geranyum", "Adaçayı"],
+      base: ["Meşe yosunu", "Vetiver", "Tonka fasulyesi"],
     },
     description: "Klasik, disiplinli, özgüvenli",
-    family: "Fougère",
-    alt_notes: ["Meşe yosunu", "Vetiver", "Tonka fasülyesi"],
+    family: "Fougere",
   },
 
   // BUSINESSMAN - AVANT-GARDE
   {
-    id: "woody-spicy-avant-garde",
-    name: "Woody, Spicy",
+    id: "avant-garde",
+    name: "Avant-Garde",
     collection: "Businessman",
-    variant: "Avant-Garde",
     price: 1250,
     ml: 50,
-    image: "/products/woody-spicy.jpg",
+    image: "/products/avant-garde.jpg",
     category: "businessman",
     subcategory: "avant-garde",
     scent: {
-      top: ["Lacivert (Semi Transparan) Şişe", "Gümüş Rengi Kapak ve Valf", "Gümüş Baskı", "Lacivert Kutu", "Gümüş Kofre Baskı", "Sefofan"],
-      middle: ["Siyah Biber", "Zencefil", "Bergamot", "Kakule"],
-      base: ["Tütsu", "Suet Deri", "Kakao özü veya bitter çikolata", "Adaçayı", "Sedir Ağacı"],
+      top: ["Siyah Biber", "Zencefil", "Bergamot", "Kakule"],
+      middle: ["Tütsü", "Süet Deri", "Kakao özü veya bitter çikolata", "Adaçayı", "Sedir Ağacı"],
+      base: ["Vetiver", "Amber", "Misk", "Labdanum", "Oud"],
     },
-    description: "Yaratıcı, özgün, cesur",
+    description: "Yaratıcı, vizyoner, cesur",
     family: "Woody, Spicy",
-    alt_notes: ["Vetiver", "Amber", "Misk", "Labdanum", "Oud"],
   },
 
   // BUSINESSMAN - ELEGANT
   {
-    id: "woody-aromatic-pudralı-elegant",
-    name: "Woody, Aromatic, Pudralı",
+    id: "elegant",
+    name: "Elegant",
     collection: "Businessman",
-    variant: "Elegant",
     price: 1250,
     ml: 50,
-    image: "/products/woody-aromatic.jpg",
+    image: "/products/elegant.jpg",
     category: "businessman",
     subcategory: "elegant",
     scent: {
-      top: ["Siyah Şişe (Semi Transparan)", "Gümüş Rengi Kapak ve Valf", "Gümüş Baskı", "Siyah Kutu", "Gümüş Kofre Baskı", "Sefofan"],
-      middle: ["Bergamot", "Pembe Biber", "Lavanta"],
-      base: ["Menekşe Yaprakları", "Süsen (Iris)", "Adaçayı"],
+      top: ["Bergamot", "Pembe Biber", "Lavanta"],
+      middle: ["Menekşe yaprakları", "Süsen (İris)", "Adaçayı"],
+      base: ["Sandal Ağacı", "Vetiver", "Kehribar", "Misk"],
     },
     description: "Sofistike, zarif ve entelektüel",
-    family: "Woody, Aromatic, Pudralı",
-    alt_notes: ["Sandal Ağacı", "Vetiver", "Kehribar", "Misk"],
+    family: "Woody, Aromatik, Pudralı",
   },
 
   // BUSINESSMAN - HOLIDAY
   {
-    id: "aquatic-narenciye-holiday",
-    name: "Aquatic, Narenciye – Aromatik – Okyanus Ferahlığı",
+    id: "holiday",
+    name: "Holiday",
     collection: "Businessman",
-    variant: "Holiday",
     price: 1250,
     ml: 50,
-    image: "/products/aquatic-narenciye.jpg",
+    image: "/products/holiday.jpg",
     category: "businessman",
     subcategory: "holiday",
     scent: {
-      top: ["Açık Mavi Şişe (Semi Transparan)", "Gümüş Rengi Kapak ve Valf", "Gümüş Baskı", "Beyaz Kutu", "Gümüş Kofre Baskı", "Sefofan"],
-      middle: ["Limon", "Nane", "Yeşil Elma", "Deniz Esintisi (Marine Akkorları)"],
-      base: ["Lavanta", "Ginger (Zencefil)", "Geranium"],
+      top: ["Limon", "Nane", "Yeşil Elma", "Deniz esintisi (Marine akorlar)"],
+      middle: ["Lavanta", "Ginger (Zencefil)", "Geranium"],
+      base: ["Sedir Ağacı", "Kehribar", "Beyaz Misk"],
     },
-    description: "Hayatı dolu dolu yaşayan, özgür ruhlu ve enerjik bir iş adamı. Tatilde, modern ve hafif.",
-    family: "Aquatic, Narenciye – Aromatik – Okyanus Ferahlığı",
-    alt_notes: ["Sedir Ağacı", "Kehribar", "Beyaz Misk"],
+    description: "Hayatı dolu dolu yaşayan, özgür ruhlu ve enerjik iş adamı",
+    family: "Aquatic, Narenciye, Aromatik",
   },
 
   // BUSINESSMAN - WEEKEND
   {
-    id: "amber-misk-spicy-weekend",
-    name: "Amber - Misk - Spicy",
+    id: "weekend",
+    name: "Weekend",
     collection: "Businessman",
-    variant: "Weekend",
     price: 1250,
     ml: 50,
-    image: "/products/amber-misk.jpg",
+    image: "/products/weekend.jpg",
     category: "businessman",
     subcategory: "weekend",
     scent: {
-      top: ["Kırmızı Şişe (Semi Transparan)", "Gümüş Rengi Kapak ve Valf", "Gümüş Baskı", "Kırmızı Kutu", "Gümüş Kofre Baskı", "Sefofan"],
-      middle: ["Greyfurt", "Bergamot", "Ardıç Tohumu"],
-      base: ["Lavanta", "Adaçayı", "Yeşil Çay Akkoru"],
+      top: ["Greyfurt", "Bergamot", "Ardıç Tohumu"],
+      middle: ["Lavanta", "Adaçayı", "Yeşil Çay Akoru"],
+      base: ["Vetiver", "Paçuli", "Kashmir Wood"],
     },
-    description: "Hafta sonu keyifli, modern ve hafif sonlarının keyfini huzurla yaşar.",
-    family: "Amber - Misk - Spicy",
-    alt_notes: ["Vetiver", "Paçuli", "Kashmir Wood"],
+    description: "Şehirli, modern, hafta sonlarının keyfini huzurla çıkaran bir stil",
+    family: "Amber, Misk, Spicy",
   },
 ];
 

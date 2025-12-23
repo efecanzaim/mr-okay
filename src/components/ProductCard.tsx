@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface Product {
   id: string;
@@ -74,18 +74,14 @@ export default function ProductCard({ product, index }: ProductCardProps) {
               transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
               className="absolute bottom-0 left-0 right-0 p-4"
             >
-              <motion.button
+              <motion.div
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  // Add to cart logic
-                }}
                 className="w-full py-3 bg-black text-white text-xs tracking-ultrawide uppercase font-medium flex items-center justify-center space-x-2 hover:bg-gray-800 transition-colors duration-300"
               >
-                <Plus size={14} strokeWidth={1.5} />
-                <span>Sepete Ekle</span>
-              </motion.button>
+                <span>Keşfet</span>
+                <ArrowRight size={14} strokeWidth={1.5} />
+              </motion.div>
             </motion.div>
 
             {/* Category Tag */}
@@ -104,9 +100,6 @@ export default function ProductCard({ product, index }: ProductCardProps) {
             <h3 className="font-serif text-lg text-black group-hover:text-silver-dark transition-colors duration-300">
               {product.name}
             </h3>
-            <p className="text-sm text-silver-dark font-light tracking-wide">
-              ₺{product.price.toFixed(2)}
-            </p>
           </div>
         </div>
       </Link>

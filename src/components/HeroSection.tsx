@@ -76,40 +76,17 @@ export default function HeroSection() {
           className="text-center max-w-4xl"
         >
           {/* Spacer for logo */}
-          <div className="mb-16 h-32" />
-
-          {/* Pre-heading */}
-          <motion.p
-            initial={{ opacity: 0, letterSpacing: "0.2em" }}
-            animate={{ opacity: 1, letterSpacing: "0.35em" }}
-            transition={{ duration: 1, delay: 0.8 }}
-            className="text-[10px] md:text-xs text-silver-dark uppercase mb-8 font-light"
-          >
-            Koku Sanatı
-          </motion.p>
+          <div className="mb-16 h-64" />
 
           {/* Main Heading */}
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 1 }}
-            className="font-serif text-5xl md:text-7xl lg:text-8xl font-medium text-black leading-[0.9] tracking-tight"
+            className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-white leading-relaxed tracking-wide"
           >
-            Özü
-            <br />
-            <span className="text-gradient-silver">Kucakla</span>
+            Klasik, Disiplinli, Özgüvenli
           </motion.h2>
-
-          {/* Tagline */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.4 }}
-            className="text-sm md:text-base text-silver-dark font-light tracking-wider mt-8 max-w-lg mx-auto leading-relaxed"
-          >
-            Zarafetin duyusallıkla buluştuğu yer. İz bırakanlar 
-            için tasarlanmış kokuları keşfedin.
-          </motion.p>
 
           {/* CTA Button */}
           <motion.div
