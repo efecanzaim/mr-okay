@@ -6,6 +6,17 @@ import ProductCard from "@/components/ProductCard";
 import ScrollReveal from "@/components/ScrollReveal";
 import { getProductsBySubcategory } from "@/data/products";
 
+// Statik export için gerekli - build zamanında hangi category'ler için sayfa oluşturulacağını belirtir
+export function generateStaticParams() {
+  return [
+    { category: "classic" },
+    { category: "avant-garde" },
+    { category: "elegant" },
+    { category: "holiday" },
+    { category: "weekend" },
+  ];
+}
+
 const categoryInfo: Record<string, { title: string; description: string }> = {
   "avant-garde": {
     title: "Avangard",

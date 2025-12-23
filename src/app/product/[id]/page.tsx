@@ -10,6 +10,13 @@ import MagneticButton from "@/components/MagneticButton";
 import ProductCard from "@/components/ProductCard";
 import { getProductById, products } from "@/data/products";
 
+// Statik export için gerekli - build zamanında hangi product id'leri için sayfa oluşturulacağını belirtir
+export function generateStaticParams() {
+  return products.map((product) => ({
+    id: product.id,
+  }));
+}
+
 // Helper function to get hover image path
 const getHoverImagePath = (imagePath: string): string => {
   const lastDotIndex = imagePath.lastIndexOf('.');
