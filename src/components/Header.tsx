@@ -9,11 +9,11 @@ import { ShoppingBag, Menu, X, User, Heart, Mail, Search, MapPin } from "lucide-
 // Note: Some icons are used only in desktop view
 
 const businessmanCategories = [
-  { name: "Classic", href: "/collections/businessman/classic", description: "Klasik, disiplinli, özgüvenli", image: "/products/classic.png" },
-  { name: "Avant-Garde", href: "/collections/businessman/avant-garde", description: "Yaratıcı, özgün, cesur", image: "/products/avantgarde.png" },
-  { name: "Elegant", href: "/collections/businessman/elegant", description: "Sofistike, zarif ve entelektüel", image: "/products/elegant.png" },
-  { name: "Holiday", href: "/collections/businessman/holiday", description: "Hayatı dolu dolu yaşayan", image: "/products/holiday.png" },
-  { name: "Weekend", href: "/collections/businessman/weekend", description: "Rahat, modern ve hafif", image: "/products/weekend.png" },
+  { name: "Classic", href: "/collections/businessman/classic", description: "Klasik, disiplinli, özgüvenli", image: "/mr-okay/products/classic.png" },
+  { name: "Avant-Garde", href: "/collections/businessman/avant-garde", description: "Yaratıcı, özgün, cesur", image: "/mr-okay/products/avantgarde.png" },
+  { name: "Elegant", href: "/collections/businessman/elegant", description: "Sofistike, zarif ve entelektüel", image: "/mr-okay/products/elegant.png" },
+  { name: "Holiday", href: "/collections/businessman/holiday", description: "Hayatı dolu dolu yaşayan", image: "/mr-okay/products/holiday.png" },
+  { name: "Weekend", href: "/collections/businessman/weekend", description: "Rahat, modern ve hafif", image: "/mr-okay/products/weekend.png" },
 ];
 
 export default function Header() {
