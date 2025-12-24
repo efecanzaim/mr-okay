@@ -43,7 +43,7 @@ export default function HeroSection() {
           playsInline
               className="absolute left-1/2 -translate-x-1/2 top-0 h-[120vh] w-[120vw] object-cover"
         >
-          <source src="/images/hero_video.mp4" type="video/mp4" />
+          <source src="/mr-okay/images/hero_video.mp4" type="video/mp4" />
             </motion.video>
 
         {/* Video Control Button */}
