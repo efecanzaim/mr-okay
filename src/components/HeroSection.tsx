@@ -43,7 +43,7 @@ export default function HeroSection() {
           playsInline
               className="absolute left-1/2 -translate-x-1/2 top-0 h-[120vh] w-[120vw] object-cover"
         >
-          <source src="/mr-okay/images/hero_video.mp4" type="video/mp4" />
+          <source src="/images/hero_video.mp4" type="video/mp4" />
             </motion.video>
 
         {/* Video Control Button */}
@@ -64,26 +64,15 @@ export default function HeroSection() {
         </motion.button>
       </motion.div>
 
-      {/* Content */}
-      <motion.div
-        style={{ opacity }}
-        className="relative z-10 h-full flex flex-col items-center justify-center px-6"
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1], delay: 0.5 }}
-          className="text-center max-w-4xl"
-        >
-          {/* Spacer for logo */}
-          <div className="mb-16 h-64" />
-
+      {/* CTA Content - Bottom of Hero */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 pb-8 lg:pb-12 px-6">
+        <div className="max-w-4xl mx-auto text-center">
           {/* Main Heading */}
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 1 }}
-            className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-white leading-relaxed tracking-wide"
+            transition={{ duration: 1.2, delay: 1, ease: [0.23, 1, 0.32, 1] }}
+            className="avenir text-3xl md:text-4xl lg:text-5xl font-light text-white leading-relaxed tracking-wide mb-8"
           >
             Klasik, Disiplinli, Özgüvenli
           </motion.h2>
@@ -92,25 +81,23 @@ export default function HeroSection() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.8 }}
-            className="mt-12"
+            transition={{ duration: 0.8, delay: 1.8, ease: [0.23, 1, 0.32, 1] }}
           >
             <Link href="/collections/businessman">
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="group relative px-12 py-4 border border-black/30 bg-white text-xs tracking-ultrawide uppercase font-light overflow-hidden transition-colors duration-300 hover:border-black/60 group-hover:bg-black avenir-thin"
+                className="group relative px-12 py-4 border border-white/30 bg-white/10 backdrop-blur-sm text-xs tracking-ultrawide uppercase font-light overflow-hidden transition-colors duration-300 hover:bg-white avenir-thin"
               >
-                <span className="relative z-10 text-black group-hover:text-white transition-colors duration-300">
+                <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
                   Keşfet
                 </span>
-                <div className="absolute inset-0 bg-black z-0 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-white z-0 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               </motion.button>
             </Link>
           </motion.div>
-        </motion.div>
-
-      </motion.div>
+        </div>
+      </div>
     </section>
     </>
   );

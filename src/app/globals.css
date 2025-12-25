@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'Blacksword';
-  src: url('/mr-okay/fonts/Blacksword.otf') format('opentype');
+  src: url('/fonts/Blacksword.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -10,7 +10,7 @@
 
 @font-face {
   font-family: 'Avenir';
-  src: url('/mr-okay/fonts/Avenir.otf') format('truetype');
+  src: url('/fonts/Avenir.otf') format('truetype');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -18,7 +18,7 @@
 
 @font-face {
   font-family: 'AvenirThin';
-  src: url('/mr-okay/fonts/AvenirThin.ttf') format('truetype');
+  src: url('/fonts/AvenirThin.ttf') format('truetype');
   font-weight: 200 400;
   font-style: normal;
   font-display: swap;
@@ -53,7 +53,7 @@ html {
 body {
   background-color: var(--white);
   color: var(--black);
-  font-family: 'Montserrat', system-ui, sans-serif;
+  font-family: 'AvenirThin', 'Montserrat', system-ui, sans-serif;
   letter-spacing: 0.05em;
   overflow-x: hidden;
 }
@@ -157,6 +157,14 @@ body {
 
   .avenir-thin {
     font-family: 'AvenirThin', 'Avenir', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  }
+
+  .avenir {
+    font-family: 'Avenir', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Avenir', system-ui, sans-serif;
   }
 }
 

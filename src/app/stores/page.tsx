@@ -164,6 +164,34 @@ const storeData: StoreLocation[] = [
   },
 ];
 
+// Online Marketplaces
+const marketplaces = [
+  {
+    id: "trendyol",
+    name: "Trendyol",
+    logo: "https://cdn.dsmcdn.com/Assets/t/y/creative/2021/mobile/logo-ty.svg",
+    url: "https://www.trendyol.com/pd/loris/mr-okay-businessman-classic-50-ml-p-1075310730",
+  },
+  {
+    id: "hepsiburada",
+    name: "Hepsiburada",
+    logo: "https://images.hepsiburada.net/assets/svg/hepsiburada-logo.svg",
+    url: "https://www.hepsiburada.com/loris-mr-okay-businessman-classic-50-ml-p-HBCV0000BOOE73",
+  },
+  {
+    id: "pttavm",
+    name: "PTT AVM",
+    logo: "https://www.pttavm.com/Assets/images/logo.svg",
+    url: "https://www.pttavm.com/mr-okay-businessman-classic-50-ml-p-1411937013",
+  },
+  {
+    id: "lcwaikiki",
+    name: "LC Waikiki",
+    logo: "https://lcwaikiki.com/assets/images/logo.svg",
+    url: "https://www.lcw.com/mr-okay-businessman-classic-50-ml-renksiz-o-5260536",
+  },
+];
+
 const cities = ["Tümü", "İstanbul", "Ankara", "Adana", "Çanakkale", "İzmir"];
 
 export default function StoresPage() {
@@ -171,6 +199,7 @@ export default function StoresPage() {
   const [selectedCity, setSelectedCity] = useState("Tümü");
   const [searchQuery, setSearchQuery] = useState("");
   const [showFilters, setShowFilters] = useState(false);
+  const [activeTab, setActiveTab] = useState<"physical" | "marketplace">("physical");
 
   const filteredStores = useMemo(() => {
     return storeData.filter((store) => {
@@ -187,7 +216,7 @@ export default function StoresPage() {
   return (
     <div className="bg-white min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[45vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[65vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-stone-100 via-stone-50 to-white" />
 
         {/* Decorative Elements */}
@@ -226,18 +255,46 @@ export default function StoresPage() {
           <h1 className="font-serif text-5xl md:text-7xl text-black mb-4">
             Bizi Bulun
           </h1>
-          <p className="text-stone-500 font-light max-w-md mx-auto">
-            Türkiye genelinde satış noktalarımız
-          </p>
         </motion.div>
       </section>
 
       {/* Main Content */}
       <section className="pb-24">
         <div className="max-w-[1800px] mx-auto px-4 lg:px-8">
-          {/* Filter Bar */}
+          {/* Tab Selector */}
           <ScrollReveal>
-            <div className="bg-stone-50 border border-stone-200 p-4 lg:p-6 mb-8">
+            <div className="flex justify-center mb-12">
+              <div className="inline-flex border border-stone-200 bg-stone-50">
+                <button
+                  onClick={() => setActiveTab("physical")}
+                  className={`px-8 py-4 text-xs tracking-ultrawide uppercase font-medium transition-all duration-300 ${
+                    activeTab === "physical"
+                      ? "bg-black text-white"
+                      : "bg-transparent text-stone-600 hover:bg-stone-100"
+                  }`}
+                >
+                  Fiziksel Mağazalar
+                </button>
+                <button
+                  onClick={() => setActiveTab("marketplace")}
+                  className={`px-8 py-4 text-xs tracking-ultrawide uppercase font-medium transition-all duration-300 ${
+                    activeTab === "marketplace"
+                      ? "bg-black text-white"
+                      : "bg-transparent text-stone-600 hover:bg-stone-100"
+                  }`}
+                >
+                  Pazar Yerleri
+                </button>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Physical Stores Section */}
+          {activeTab === "physical" && (
+            <>
+              {/* Filter Bar */}
+              <ScrollReveal>
+                <div className="bg-stone-50 border border-stone-200 p-4 lg:p-6 mb-8">
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 {/* Search */}
                 <div className="relative flex-1 max-w-md">
@@ -440,6 +497,50 @@ export default function StoresPage() {
               </ScrollReveal>
             </div>
           </div>
+            </>
+          )}
+
+          {/* Marketplace Section */}
+          {activeTab === "marketplace" && (
+            <ScrollReveal>
+              <div className="max-w-6xl mx-auto">
+                <div className="text-center mb-16">
+                  <p className="text-[10px] tracking-ultrawide uppercase text-stone-500 mb-4">
+                    Online Pazar Yerleri
+                  </p>
+                  <h2 className="font-serif text-4xl md:text-5xl text-black mb-4">
+                    Güvenilir Platformlardan Alışveriş
+                  </h2>
+                  <p className="text-stone-500 font-light max-w-lg mx-auto">
+                    Ürünlerimizi Türkiye'nin önde gelen e-ticaret platformlarından satın alabilirsiniz.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {marketplaces.map((marketplace, index) => (
+                    <motion.a
+                      key={marketplace.id}
+                      href={marketplace.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="group relative bg-white border border-stone-200 hover:border-black transition-all duration-300 overflow-hidden"
+                    >
+                      <div className="aspect-[4/3] flex items-center justify-center p-8 bg-stone-50 group-hover:bg-white transition-colors duration-300">
+                        <div className="text-center w-full">
+                          <h3 className="font-medium text-black text-lg mb-2">{marketplace.name}</h3>
+                          <p className="text-xs text-stone-500 uppercase tracking-wide">Satın Al</p>
+                        </div>
+                      </div>
+                      <div className="absolute inset-0 border-2 border-black opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
+          )}
         </div>
       </section>
 

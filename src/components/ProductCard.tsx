@@ -12,6 +12,7 @@ interface Product {
   price: number;
   image: string;
   category: string;
+  description: string;
 }
 
 interface ProductCardProps {
@@ -124,7 +125,7 @@ export default function ProductCard({ product, index }: ProductCardProps) {
             {/* Category Tag */}
             <div className="absolute top-4 left-4">
               <span className="text-[10px] tracking-ultrawide text-white bg-black/60 px-3 py-1 backdrop-blur-sm">
-                {product.category.toLocaleUpperCase('en-US')}
+                {product.category === 'businessman' ? 'YENİ' : product.category.toLocaleUpperCase('en-US')}
               </span>
             </div>
           </div>
@@ -137,6 +138,9 @@ export default function ProductCard({ product, index }: ProductCardProps) {
             <h3 className="font-serif text-lg text-black group-hover:text-silver-dark transition-colors duration-300">
               {product.name}
             </h3>
+            <p className="text-xs text-silver-dark font-light leading-relaxed">
+              {product.description}
+            </p>
           </div>
         </div>
       </Link>

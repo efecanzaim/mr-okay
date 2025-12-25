@@ -39,8 +39,97 @@ export default function Footer() {
 
   return (
     <>
+      {/* Newsletter & Social Section */}
+      <section className="bg-black py-6 lg:py-8 border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
+            {/* Newsletter - Abone Ol */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="flex flex-col lg:flex-row lg:items-center gap-3"
+            >
+              <h3 className="avenir text-base lg:text-lg font-light text-white whitespace-nowrap">
+                Abone Ol
+              </h3>
+              <form onSubmit={handleSubscribe} className="flex flex-1 max-w-md">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="E-posta adresiniz"
+                  required
+                  className="flex-1 px-3 py-2 bg-transparent border border-white/20 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-white/40 transition-colors duration-300"
+                />
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-4 py-2 bg-white text-black hover:bg-white/90 transition-colors duration-300 flex items-center justify-center"
+                >
+                  <Send size={14} strokeWidth={1.5} />
+                </motion.button>
+              </form>
+              {isSubscribed && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-xs text-green-400 lg:ml-4"
+                >
+                  Başarıyla abone oldunuz!
+                </motion.p>
+              )}
+            </motion.div>
+
+            {/* Social Media - Bizi Takip Edin */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex flex-col lg:flex-row lg:items-center gap-3 lg:justify-end"
+            >
+              <h3 className="avenir text-base lg:text-lg font-light text-white whitespace-nowrap">
+                Bizi Takip Edin
+              </h3>
+              <div className="flex items-center gap-2">
+                <motion.a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+                >
+                  <Instagram size={16} strokeWidth={1.5} />
+                </motion.a>
+                <motion.a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+                >
+                  <Facebook size={16} strokeWidth={1.5} />
+                </motion.a>
+                <motion.a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+                >
+                  <Twitter size={16} strokeWidth={1.5} />
+                </motion.a>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Pre-Footer */}
-      <section className="bg-black py-16 lg:py-20">
+      <section className="bg-black py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16 max-w-4xl mx-auto">
             {/* Ücretsiz Kargo */}
@@ -133,38 +222,6 @@ export default function Footer() {
                 Farklı olmaya cesaret edenler için olağanüstü kokular yaratıyoruz.
                 Her koku, sofistike ve bireysellik hikayesi anlatır.
               </p>
-
-              {/* Social Links */}
-              <div className="flex items-center space-x-6 mt-8">
-                <motion.a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  className="text-silver hover:text-white transition-colors duration-300"
-                >
-                  <Instagram size={18} strokeWidth={1.5} />
-                </motion.a>
-                <motion.a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  className="text-silver hover:text-white transition-colors duration-300"
-                >
-                  <Facebook size={18} strokeWidth={1.5} />
-                </motion.a>
-                <motion.a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  className="text-silver hover:text-white transition-colors duration-300"
-                >
-                  <Twitter size={18} strokeWidth={1.5} />
-                </motion.a>
-              </div>
-
             </motion.div>
 
             {/* Links Columns */}
@@ -244,76 +301,37 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Newsletter & Bize Ulaşın Row */}
+        {/* Bize Ulaşın Row */}
         <div className="py-12 border-t border-white/10">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-0">
-            {/* Newsletter & Bize Ulaşın side by side */}
-            <div className="flex flex-col md:flex-row w-full">
-              {/* Newsletter */}
-              <div className="flex-1 max-w-md mb-0 md:mb-0">
-                <p className="text-xs text-silver/80 font-light mb-3">
-                  Yeni koleksiyonlardan haberdar olun
-                </p>
-                <form onSubmit={handleSubscribe} className="flex">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="E-posta adresiniz"
-                    required
-                    className="flex-1 px-4 py-2.5 bg-transparent border border-white/20 border-r-0 text-white placeholder:text-silver/60 text-sm focus:outline-none focus:border-white/40 transition-colors duration-300"
-                  />
-                  <motion.button
-                    type="submit"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="px-4 py-2.5 bg-white text-black hover:bg-silver-light transition-colors duration-300"
-                  >
-                    <Send size={16} strokeWidth={1.5} />
-                  </motion.button>
-                </form>
-                {isSubscribed && (
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="text-xs text-green-400 mt-2"
-                  >
-                    Abone oldunuz!
-                  </motion.p>
-                )}
-              </div>
-              {/* Bize Ulaşın */}
-              <div className="flex-1 md:ml-8 mt-4 md:mt-0 flex flex-col md:items-end">
-                <h3 className="text-xs font-sans font-medium tracking-ultrawide uppercase text-white mb-2 md:mb-4">
-                  Bize Ulaşın
-                </h3>
-                <div className="flex items-center gap-8">
-                  <a
-                    href="https://wa.me/905551234567"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center group"
-                  >
-                    <div className="w-16 h-16 rounded-lg border border-white/20 flex items-center justify-center mb-2 group-hover:border-white/40 transition-colors duration-300">
-                      <MessageCircle size={28} strokeWidth={1} className="text-white" />
-                    </div>
-                    <span className="text-xs text-silver group-hover:text-white transition-colors duration-300 font-light">
-                      Whatsapp
-                    </span>
-                  </a>
-                  <a
-                    href="mailto:info@mrokay.com"
-                    className="flex flex-col items-center group"
-                  >
-                    <div className="w-16 h-16 rounded-lg border border-white/20 flex items-center justify-center mb-2 group-hover:border-white/40 transition-colors duration-300">
-                      <Mail size={28} strokeWidth={1} className="text-white" />
-                    </div>
-                    <span className="text-xs text-silver group-hover:text-white transition-colors duration-300 font-light">
-                      İletişim
-                    </span>
-                  </a>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-center gap-8">
+            <h3 className="text-xs font-sans font-medium tracking-ultrawide uppercase text-white text-center md:text-left">
+              Bize Ulaşın
+            </h3>
+            <div className="flex items-center justify-center gap-8">
+              <a
+                href="https://wa.me/905551234567"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center group"
+              >
+                <div className="w-16 h-16 rounded-lg border border-white/20 flex items-center justify-center mb-2 group-hover:border-white/40 transition-colors duration-300">
+                  <MessageCircle size={28} strokeWidth={1} className="text-white" />
                 </div>
-              </div>
+                <span className="text-xs text-silver group-hover:text-white transition-colors duration-300 font-light">
+                  Whatsapp
+                </span>
+              </a>
+              <a
+                href="mailto:info@mrokay.com"
+                className="flex flex-col items-center group"
+              >
+                <div className="w-16 h-16 rounded-lg border border-white/20 flex items-center justify-center mb-2 group-hover:border-white/40 transition-colors duration-300">
+                  <Mail size={28} strokeWidth={1} className="text-white" />
+                </div>
+                <span className="text-xs text-silver group-hover:text-white transition-colors duration-300 font-light">
+                  İletişim
+                </span>
+              </a>
             </div>
           </div>
         </div>

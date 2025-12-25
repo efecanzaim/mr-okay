@@ -25,7 +25,7 @@ export const products: Product[] = [
     collection: "BUSINESSMAN",
     price: 1250,
     ml: 50,
-    image: "/mr-okay/products/classic.png",
+    image: "/products/classic.png",
     category: "businessman",
     subcategory: "classic",
     scent: {
@@ -44,7 +44,7 @@ export const products: Product[] = [
     collection: "BUSINESSMAN",
     price: 1250,
     ml: 50,
-    image: "/mr-okay/products/avantgarde.png",
+    image: "/products/avantgarde.png",
     category: "businessman",
     subcategory: "avant-garde",
     scent: {
@@ -63,7 +63,7 @@ export const products: Product[] = [
     collection: "BUSINESSMAN",
     price: 1250,
     ml: 50,
-    image: "/mr-okay/products/elegant.png",
+    image: "/products/elegant.png",
     category: "businessman",
     subcategory: "elegant",
     scent: {
@@ -82,7 +82,7 @@ export const products: Product[] = [
     collection: "BUSINESSMAN",
     price: 1250,
     ml: 50,
-    image: "/mr-okay/products/holiday.png",
+    image: "/products/holiday.png",
     category: "businessman",
     subcategory: "holiday",
     scent: {
@@ -101,7 +101,7 @@ export const products: Product[] = [
     collection: "BUSINESSMAN",
     price: 1250,
     ml: 50,
-    image: "/mr-okay/products/weekend.png",
+    image: "/products/weekend.png",
     category: "businessman",
     subcategory: "weekend",
     scent: {

@@ -1,10 +1,11 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
   output: 'export',
-  // GitHub Pages için basePath ayarı
-  // Repository adınız efecanzaim/mr-okay olduğu için basePath /mr-okay olmalı
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '/mr-okay',
-  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '/mr-okay',
+  // GitHub Pages için basePath ayarı - sadece production'da aktif
+  basePath: isProd ? '/mr-okay' : '',
+  assetPrefix: isProd ? '/mr-okay' : '',
   trailingSlash: true, // GitHub Pages için önerilir
   images: {
     unoptimized: true, // GitHub Pages için gerekli

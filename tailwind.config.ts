@@ -19,7 +19,8 @@ const config: Config = {
       },
       fontFamily: {
         serif: ["Playfair Display", "Georgia", "serif"],
-        sans: ["Montserrat", "system-ui", "sans-serif"],
+        sans: ["AvenirThin", "Montserrat", "system-ui", "sans-serif"],
+        heading: ["Avenir", "system-ui", "sans-serif"],
       },
       letterSpacing: {
         widest: "0.25em",

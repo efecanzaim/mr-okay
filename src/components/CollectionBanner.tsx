@@ -33,7 +33,7 @@ export default function CollectionBanner() {
                   className="absolute inset-0 scale-110"
                 >
                   <Image
-                    src="/mr-okay/images/businessman_banner.jpg"
+                    src="/images/businessman_banner.jpg"
                     alt="Businessman Collection"
                     fill
                     className="object-cover"
@@ -79,7 +79,7 @@ export default function CollectionBanner() {
                   className="absolute inset-0 scale-110"
                 >
                   <Image
-                    src="/mr-okay/images/smartwoman_banner.jpg"
+                    src="/images/smartwoman_banner.jpg"
                     alt="Smartwoman Collection"
                     fill
                     className="object-cover"
