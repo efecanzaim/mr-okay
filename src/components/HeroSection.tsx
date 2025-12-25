@@ -73,7 +73,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 1, ease: [0.23, 1, 0.32, 1] }}
-            className="avenir text-3xl md:text-4xl lg:text-5xl font-light text-white leading-relaxed tracking-wide mb-8"
+            className="avenir text-xl md:text-2xl lg:text-3xl font-light text-white leading-relaxed tracking-wide mb-8"
           >
             Klasik, Disiplinli, Özgüvenli
           </motion.h2>

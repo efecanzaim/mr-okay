@@ -39,16 +39,23 @@ export default function Header() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Handle animation state based on page
+  // Handle animation state based on page and scroll position
   useEffect(() => {
     if (isHomePage) {
-      // Reset animation when returning to home page (only if at top of page)
-      if (window.scrollY === 0) {
+      // Check if we're in hero area (viewport height)
+      const isInHeroArea = window.scrollY < window.innerHeight;
+
+      if (isInHeroArea) {
+        // In hero area - show animation
         setLogoAnimationComplete(false);
         setShowNavigation(false);
+      } else {
+        // Below hero area - skip animation, show normal state
+        setLogoAnimationComplete(true);
+        setShowNavigation(true);
       }
     } else {
-      // Immediately show normal logo on other pages
+      // Other pages - always show normal state
       setLogoAnimationComplete(true);
       setShowNavigation(true);
     }
@@ -60,17 +67,16 @@ export default function Header() {
 
       // Only run animation logic on home page
       if (isHomePage) {
-        // Trigger animation based on scroll position
-        if (scrollYValue > 0) {
-          if (!logoAnimationComplete) {
-            setLogoAnimationComplete(true);
-            // Show navigation after a delay
-            setTimeout(() => {
-              setShowNavigation(true);
-            }, 800);
-          }
-        } else {
-          // Reset to initial state when scroll is at top
+        const isInHeroArea = scrollYValue < window.innerHeight;
+
+        if (!isInHeroArea && !logoAnimationComplete) {
+          // Scrolled out of hero area - complete animation
+          setLogoAnimationComplete(true);
+          setTimeout(() => {
+            setShowNavigation(true);
+          }, 800);
+        } else if (isInHeroArea && logoAnimationComplete) {
+          // Scrolled back into hero area - reset animation
           setLogoAnimationComplete(false);
           setShowNavigation(false);
         }
@@ -148,11 +154,11 @@ export default function Header() {
                 <motion.div
                   initial={{
                     y: "20vh",
-                    scale: isMobile ? 2 : 3.5,
+                    scale: isMobile ? 2 : 2.8,
                   }}
                   animate={{
                     y: logoAnimationComplete ? "0px" : "20vh",
-                    scale: logoAnimationComplete ? 1 : (isMobile ? 2 : 3.5),
+                    scale: logoAnimationComplete ? 1 : (isMobile ? 2 : 2.8),
                   }}
                   transition={{
                     duration: 1.2,
