@@ -30,8 +30,39 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
   return (
     <html lang="tr">
+      <head>
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            @font-face {
+              font-family: 'Blacksword';
+              src: url('${basePath}/fonts/Blacksword.otf') format('opentype');
+              font-weight: normal;
+              font-style: normal;
+              font-display: swap;
+            }
+
+            @font-face {
+              font-family: 'Avenir';
+              src: url('${basePath}/fonts/Avenir.otf') format('truetype');
+              font-weight: 400 700;
+              font-style: normal;
+              font-display: swap;
+            }
+
+            @font-face {
+              font-family: 'AvenirThin';
+              src: url('${basePath}/fonts/AvenirThin.ttf') format('truetype');
+              font-weight: 200 400;
+              font-style: normal;
+              font-display: swap;
+            }
+          `
+        }} />
+      </head>
       <body className="bg-white text-black antialiased">
         <Header />
         <main className="min-h-screen">{children}</main>

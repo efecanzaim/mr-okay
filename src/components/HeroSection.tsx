@@ -9,6 +9,7 @@ export default function HeroSection() {
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -43,7 +44,7 @@ export default function HeroSection() {
           playsInline
               className="absolute left-1/2 -translate-x-1/2 top-0 h-[120vh] w-[120vw] object-cover"
         >
-          <source src="/images/hero_video.mp4" type="video/mp4" />
+          <source src={`${basePath}/images/hero_video.mp4`} type="video/mp4" />
             </motion.video>
 
         {/* Video Control Button */}

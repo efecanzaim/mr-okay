@@ -14,6 +14,7 @@ export default function CollectionBanner() {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   return (
     <section ref={ref} className="py-24 lg:py-32 bg-gray-50 overflow-hidden">
@@ -33,7 +34,7 @@ export default function CollectionBanner() {
                   className="absolute inset-0 scale-110"
                 >
                   <Image
-                    src="/images/businessman_banner.jpg"
+                    src={`${basePath}/images/businessman_banner.jpg`}
                     alt="Businessman Collection"
                     fill
                     className="object-cover"
@@ -79,7 +80,7 @@ export default function CollectionBanner() {
                   className="absolute inset-0 scale-110"
                 >
                   <Image
-                    src="/images/smartwoman_banner.jpg"
+                    src={`${basePath}/images/smartwoman_banner.jpg`}
                     alt="Smartwoman Collection"
                     fill
                     className="object-cover"
