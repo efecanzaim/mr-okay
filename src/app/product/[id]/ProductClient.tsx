@@ -36,6 +36,7 @@ export default function ProductClient({ product, productId }: ProductClientProps
       price: p.price,
       image: p.image,
       category: p.category,
+      description: p.description,
     }));
 
   return (
